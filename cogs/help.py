@@ -15,7 +15,7 @@ class help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(invoke_without_command = True)
+    @commands.group(invoke_without_command = True, aliases = ['hlp'])
     async def help(self, ctx):
         embed = discord.Embed(title= "**Help commands!**", description="\uFEFF", colour = ctx.author.colour)
         embed.add_field(name= "**Moderation**", value= "\uFEFF", inline= False)
@@ -80,6 +80,9 @@ class help(commands.Cog):
         embed.add_field(name = "**Roleplay**", value="Show a list of roleplay commands!", inline= False)
         embed.add_field(name = "**Fact**", value="Show a list of fact commands!", inline= False)
         embed.add_field(name = "**Compliment**", value="Compliment someone", inline= False)
+        embed.add_field(name = "**Quote**", value="Get a random anime quote", inline= False)
+        embed.add_field(name = "**Pokedex**", value="Get information about a pokemon", inline= False)
+        embed.add_field(name = "**Image**", value="Get a random image, use `<your prefix>help image` for help ", inline= False)
         embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Requested by {ctx.author.name}")
         await ctx.send(embed = embed)
 
@@ -108,13 +111,37 @@ class help(commands.Cog):
 
     @help.command(aliases = ["facts"])
     async def fact(self, ctx):
-        embed = discord.Embed(title= "**Fun commands!**", description="\uFEFF", colour = ctx.author.colour)
+        embed = discord.Embed(title= "**Fact commands!**", description="\uFEFF", colour = ctx.author.colour)
         embed.add_field(name= "**Catfact**", value= "Get a random cat fact")
         embed.add_field(name= "**Dogfact**", value= "Get a random dog fact")
         embed.add_field(name= "**Pandafact**", value= "Get a random panda fact")
         embed.add_field(name= "**Birdfact**", value= "Get a random bird fact")
+        embed.add_field(name= "**Foxfact**", value= "Get a random fox fact")
+        embed.add_field(name= "**Koalafact**", value= "Get a random koala fact")
         embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Requested by {ctx.author.name}")
         await ctx.send(embed = embed)
+
+    @help.command(aliases = ['img'])
+    async def image(self, ctx):
+        embed = discord.Embed(title= "**Image commands!**", description="Usage: `<yourprefix>image [the following categories]`", colour = ctx.author.colour)
+        embed.add_field(name= "**Dog**", value= "Get a random dog image")
+        embed.add_field(name= "**Cat**", value= "Get a random cat image")
+        embed.add_field(name= "**Bird**", value= "Get a random birb image")
+        embed.add_field(name= "**Panda**", value= "Get a random panda image")
+        embed.add_field(name= "**Fox**", value= "Get a random fox image")
+        embed.add_field(name= "**Koala**", value= "Get a random koala image")
+        embed.add_field(name= "\uFEFF", value= "**Image Manipulation**\n usage: `<prefix>[category] [member mention]`")
+        embed.add_field(name= "\uFEFF", value= "**Categories:**", inline = False)
+        embed.add_field(name= "**Trigger**", value= "Trigger someone", inline = False)
+        embed.add_field(name= "**Gay**", value= "A rainbow overlay to an image", inline = False)
+        embed.add_field(name= "**Wasted**", value= "GTA wasted overlay", inline = False)
+        embed.add_field(name= "**Glass**", value= "Overlays a glass texture over an image", inline = False)
+        embed.add_field(name= "**Horny**", value= "Horny pass or not horny >:D")
+        embed.set_footer(icon_url=ctx.author.avatar_url, text=f"Requested by {ctx.author.name}")
+        await ctx.send(embed = embed)
+
+    
+    
 
 
 def setup(bot):

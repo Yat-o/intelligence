@@ -118,18 +118,10 @@ class ErrorHandler(commands.Cog):
             )
 
         elif isinstance(error, commands.CommandInvokeError):
-            embed = discord.Embed(
-                title="Oops!",
-                description="Command Failed To Execute. Reason:\n`INTERNAL ERROR`",
-                color=0xFF0000,
-            )
-            embed.set_footer(text="Please Contact fightlol#0791 For Help")
-            await ctx.send(embed=embed)
             log.error(
                 f"{ctx.command.qualified_name} failed to execute. ",
                 exc_info=error.original,
             )
-    
             
 def setup(bot):
     bot.add_cog(ErrorHandler(bot))

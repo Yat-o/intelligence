@@ -40,11 +40,20 @@ class Facts(commands.Cog):
             async with cs.get('https://some-random-api.ml/facts/bird') as r:
                 await ctx.send((await r.json())['fact'])
 
+    @commands.command()
+    async def foxfact(self, ctx):
+        """Get a random bird fact"""
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get('https://some-random-api.ml/facts/fox') as r:
+                await ctx.send((await r.json())['fact'])
 
     @commands.command()
-    async def random(self, ctx):
-        """Get a random fact"""
-        await ctx.send(x)
+    async def koalafact(self, ctx):
+        """Get a random bird fact"""
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get('https://some-random-api.ml/facts/koala') as r:
+                await ctx.send((await r.json())['fact'])
+
 
 
 def setup(bot):

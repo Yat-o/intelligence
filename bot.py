@@ -12,7 +12,7 @@ import aiohttp
 from io import BytesIO
 from discord import Activity, ActivityType
 from discord.ext import tasks
-
+from discord import Spotify
 import topgg
 
 autoroles = {}
@@ -188,5 +188,23 @@ async def update_stats():
 
 
 update_stats.start()
+
+@bot.command()
+async def spotify(ctx, user: discord.Member = None):
+    if user == None:
+        user = ctx.author
+        pass
+    if user.activities:
+        for activity in user.activities:
+            if isinstance(activity, Spotify):
+                embed = discord.Embed(
+                    title = f"{user.name}'s Spotify",
+                    description = "Listening to {}".format(activity.title),
+                    color = 0xC902FF)
+                embed.set_thumbnail(url=activity.album_cover_url)
+                embed.add_field(name="Artist", value=activity.artist)
+                embed.add_field(name="Album", value=activity.album)
+                embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
+                await ctx.send(embed=embed)
 
 bot.run(bot.config_token)

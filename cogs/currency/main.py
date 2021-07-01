@@ -17,7 +17,7 @@ class Mod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases = ['bal'])
     async def balance(self, ctx):
         await open_account(ctx.author)
 
@@ -51,7 +51,7 @@ class Mod(commands.Cog):
         with open("mainbank.json","w") as f:
             json.dump(users,f)
 
-    @commands.command()
+    @commands.command(aliases = ['wd'])
     async def withdraw(self, ctx, amount = None):
         await open_account(ctx.author)
 
@@ -74,7 +74,7 @@ class Mod(commands.Cog):
 
         await ctx.send(f"You withdrew {amount} coins!")
 
-    @commands.command()
+    @commands.command(aliases = ['dep'])
     async def deposit(self, ctx, amount = None):
         await open_account(ctx.author)
 
@@ -97,7 +97,7 @@ class Mod(commands.Cog):
 
         await ctx.send(f"You deposited {amount} coins!")
 
-    @commands.command()
+    @commands.command(aliases = ['give'])
     async def send(self, ctx, member: discord.Member,amount = None):
         await open_account(ctx.author)
         await open_account(member)

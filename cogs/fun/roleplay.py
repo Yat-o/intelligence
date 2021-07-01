@@ -18,7 +18,7 @@ class Fun(commands.Cog):
     @commands.command()  # copy and pasting time bois
     @commands.guild_only()
     @commands.bot_has_permissions(embed_links=True)
-    async def pat(self, ctx, *, args):
+    async def pat(self, ctx, member:discord.Member, *, args = npa):
         """Pats a user!"""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/pat") as r:
@@ -26,7 +26,7 @@ class Fun(commands.Cog):
                 pat = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} pats {args}", color=0x000000
+                    description=f"{ctx.author.mention} pats {member.mention}.. *pat pat*", color=0x000000
                 )
                 embed.set_image(url=pat)
                 await ctx.send(embed=embed)
@@ -35,7 +35,7 @@ class Fun(commands.Cog):
     @commands.command()
     @commands.guild_only()
     @commands.bot_has_permissions(embed_links=True)
-    async def hug(self, ctx, *, args=npa):
+    async def hug(self, ctx, member:discord.Member, *, args = npa):
         """Hug someone!"""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/hug") as r:
@@ -43,14 +43,14 @@ class Fun(commands.Cog):
                 hug = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} hugs {args}", color=0x000000
+                    description=f"{ctx.author.mention} hugs {member.mention} ... aww", color=0x000000
                 )
                 embed.set_image(url=hug)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def cuddle(self, ctx, *, args=npa):
+    async def cuddle(self, ctx, member:discord.Member, *, args = npa):
         """Cuddle with someone!"""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/cuddle") as r:
@@ -58,14 +58,14 @@ class Fun(commands.Cog):
                 cuddle = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} cuddles {args}", color=0x000000
+                    description=f"{ctx.author.mention} cuddles {member.mention}", color=0x000000
                 )
                 embed.set_image(url=cuddle)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def lick(self, ctx, *, args=npa):
+    async def lick(self, ctx, member:discord.Member, *, args = npa):
         """Lick someone."""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/lick") as r:
@@ -73,14 +73,14 @@ class Fun(commands.Cog):
                 lick = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} licks {args}", color=0x000000
+                    description=f"{ctx.author.mention} licks {member.mention}... gross", color=0x000000
                 )
                 embed.set_image(url=lick)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def bully(self, ctx, *, args=npa):
+    async def bully(self, ctx, member:discord.Member, *, args = npa):
         """Bully someone :imp:"""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/bully") as r:
@@ -88,14 +88,14 @@ class Fun(commands.Cog):
                 bully = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} bullies {args}", color=0x000000
+                    description=f"{ctx.author.mention} bullies {member.mention}... *imma tell on you >:*", color=0x000000
                 )
                 embed.set_image(url=bully)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def poke(self, ctx, *, args=npa):
+    async def poke(self, ctx, member:discord.Member, *, args = npa):
         """Boop Boop."""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/poke") as r:
@@ -103,7 +103,7 @@ class Fun(commands.Cog):
                 poke = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} pokes {args}", color=0x000000
+                    description=f"{ctx.author.mention} pokes {member.mention}", color=0x000000
                 )
                 embed.set_image(url=poke)
                 await ctx.send(embed=embed)
@@ -112,7 +112,7 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def slap(self, ctx, *, args=npa):
+    async def slap(self, ctx, member:discord.Member, *, args = npa):
         """Slap someone."""
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://waifu.pics/api/sfw/slap") as r:
@@ -120,7 +120,7 @@ class Fun(commands.Cog):
                 slap = (await r.json())["url"]
 
                 embed = discord.Embed(
-                    description=f"{ctx.author.mention} slaps {args}", color=0x000000
+                    description=f"{ctx.author.mention} slaps {member.mention}", color=0x000000
                 )
                 embed.set_image(url=slap)
                 await ctx.send(embed=embed)
@@ -143,13 +143,13 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def kiss(self, ctx, *, args =npa):
+    async def kiss(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/kiss") as r:
 
                 kiss = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} kissed {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} kissed {member.mention}")
                 embed.set_image(url=kiss)
                 await ctx.send(embed=embed)
 
@@ -166,34 +166,34 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def bonk(self, ctx, *, args = npa):
+    async def bonk(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/bonk") as r:
                 bonk = (await r.json()) ["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} bonked {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} bonked {member.mention}")
                 embed.set_image(url=bonk)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def yeet(self, ctx, *, args=npa):
+    async def yeet(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/yeet") as r:
                 yeet = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} yeeted {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} yeeted {member.mention}")
                 embed.set_image(url=yeet)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def highfive(self, ctx, *, args=npa):
+    async def highfive(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/highfive") as r:
                 highfive = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} highfives {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} highfives {member.mention}")
                 embed.set_image(url=highfive)
                 await ctx.send(embed=embed)
 
@@ -279,45 +279,56 @@ class Fun(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def bite(self, ctx, *, args=npa):
+    async def bite(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/bite") as r:
                 bite = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} bit {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} bit {member.mention}")
                 embed.set_image(url=bite)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def glomp(self, ctx, *, args=npa):
+    async def glomp(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/glomp") as r:
                 glomp = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} glomps {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} glomps {member.mention}")
                 embed.set_image(url=glomp)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def kill(self, ctx, *, args=npa):
+    async def kill(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/kill") as r:
                 kill = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} killed {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} killed {member.mention}")
                 embed.set_image(url=kill)
                 await ctx.send(embed=embed)
 
     @commands.command()
     @commands.guild_only()
-    async def wink(self, ctx, *, args=npa):
+    async def wink(self, ctx, member:discord.Member, *, args = npa):
         async with aiohttp.ClientSession() as cs:
             async with cs.get("https://api.waifu.pics/sfw/wink") as r:
                 wink = (await r.json())["url"]
 
-                embed = discord.Embed(description=f"{ctx.author.mention} winked at {args}")
+                embed = discord.Embed(description=f"{ctx.author.mention} winked at {member.mention}")
+                embed.set_image(url=wink)
+                await ctx.send(embed=embed)
+
+    @commands.command()
+    @commands.guild_only()
+    async def facepalm(self, ctx):
+        async with aiohttp.ClientSession() as cs:
+            async with cs.get("https://api.waifu.pics/sfw/face_palm") as r:
+                wink = (await r.json())["url"]
+
+                embed = discord.Embed(description=f"{ctx.author.mention} face palmed... smh")
                 embed.set_image(url=wink)
                 await ctx.send(embed=embed)
 

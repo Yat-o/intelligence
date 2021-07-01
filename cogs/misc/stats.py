@@ -7,6 +7,7 @@ import aiohttp
 import datetime
 import humanize
 from discord.ext.commands.core import command
+import datetime, time
 
 import cogs._json
 
@@ -18,6 +19,8 @@ class Commands(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         print("Command cog has been loaded")
+        global startTime
+        startTime = time.time()
 
     @commands.command()
     async def stats(self, ctx):
@@ -25,6 +28,7 @@ class Commands(commands.Cog):
         dpyVersion = discord.__version__
         serverCount = len(self.bot.guilds)
         memberCount = len(set(self.bot.get_all_members()))
+        uptime = str(datetime.timedelta(seconds=int(round(time.time()-startTime))))
 
         embed = discord.Embed(title = f"{self.bot.user.name}'s stats", description = '\uFEFF', colour = ctx.author.colour, timestamp = ctx.message.created_at)
         embed.add_field(name = "Bot Version: ", value = "0.0.1", inline=False)
@@ -32,8 +36,8 @@ class Commands(commands.Cog):
         embed.add_field(name = "Discord.py Version: ", value=dpyVersion)
         embed.add_field(name = "Total guilds: ", value=serverCount)
         embed.add_field(name = "Total Members: ", value=memberCount)
+        embed.add_field(name = "Uptime ", value=uptime)
         embed.add_field(name = "Bot Developers ", value="<@467631169358528513>")
-
         await ctx.send(embed = embed)
 
     @commands.command()
@@ -258,25 +262,6 @@ class Commands(commands.Cog):
             .add_field(name="Link", value=emoji.url, inline=False)
             .set_image(url=emoji.url)
         )
-
-    @commands.command()
-    async def spotify(ctx, user: discord.Member = None):
-        activity = user.activity
-        if user == None:
-            user = ctx.author
-            pass
-        if user.activities:
-            for activity in user.activities:
-                if isinstance(activity, Spotify):
-                    embed = discord.Embed(
-                        title = f"{user.name}'s Spotify",
-                        description = "Listening to {}".format(activity.title),
-                        color = 0xC902FF)
-                    embed.set_thumbnail(url=activity.album_cover_url)
-                    embed.add_field(name="Artist", value=activity.artist)
-                    embed.add_field(name="Album", value=activity.album)
-                    embed.set_footer(text="Song started at {}".format(activity.created_at.strftime("%H:%M")))
-                    await ctx.send(embed=embed)
 
     @commands.command()
     async def uptime(self, ctx: commands.Context):
